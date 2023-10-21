@@ -18,15 +18,13 @@ RUN apt-get update && \
     pip install -r requirements.txt && \
     cd devops
 
-# Expose port 8000 for the Django development server
-ENTRYPOINT ["python3"]
-CMD ["manage.py", "runserver", "0.0.0.0:8000"]
-
 # Collect static files
 RUN python3 manage.py collectstatic --noinput
 
 # Migrate the database
 RUN python3 manage.py migrate
 
-# Start the Django development server
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+# Expose port 8000 for the Django development server
+ENTRYPOINT ["python3"]
+CMD ["manage.py", "runserver", "0.0.0.0:8000"]
+
